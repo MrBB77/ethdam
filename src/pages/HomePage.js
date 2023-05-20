@@ -17,13 +17,18 @@ import {
     parseEther,
   } from "viem";
 
+const GROU_ID = "0xeb8feea83ddaf266a806ee40c1b04fba";
+
 const sismoConnectConfig = {
-    appId: "0xd345943db0a9c43788a850b039560e05"
+    appId: "0xd345943db0a9c43788a850b039560e05",
+    devMode: {
+      enabled: true
+    }
   };
 
-
 function HomePage() {
-  const [responseBytes, setResponseBytes] = useState("");
+  let [responseBytes, setResponseBytes, address] = useState("");
+
   const ethers = new Ethers();
 
   useEffect(() => {
@@ -37,11 +42,15 @@ function HomePage() {
 
     async function setResponse(responseBytes) {
         console.log(responseBytes)
-        //await ethers.addVerifiedEmployee(responseBytes);
+        await ethers.addVerifiedEmployee(responseBytes);
     }
 
-    async function signMessage (address) {
-        return encodeAbiParameters(address)
+    function signMessage (address) {
+        const res = encodeAbiParameters(
+          [{ type: "address", name: "airdropAddress" }],
+          [address]
+        )
+        return res;
     }
 
 
@@ -50,12 +59,10 @@ function HomePage() {
       <SismoConnectButton
         config={sismoConnectConfig}
         auths={[{ authType: AuthType.VAULT }]}
-        signature={{ message: signMessage(ethers.address) }}
+        signature={{ message: signMessage(address ?? "0x1c46D242755040a0032505fD33C6e8b83293a332") }}
         onResponseBytes={(responseBytes) => setResponse(responseBytes)}
         text={"Claim with Sismo"}
       />
-
-        {responseBytes && <div>Response: {responseBytes}</div>}
     </div>
   );
 }

@@ -8,7 +8,7 @@ class Ethers {
         this.provider = provider
         this.signer = this.provider.getSigner();
 
-        this.employer = new ethers.Contract("0x1d00C469BD8e806F9Be5b390687c58852A8256e3", employerAbi, this.signer);
+        this.employer = new ethers.Contract("0x773DEfAaEFb3F9cf5F570f6fB7726F92c7d8eec6", employerAbi, this.signer);
 
         window.ethereum.on("accountsChanged", async () => {
             await this.connect();
