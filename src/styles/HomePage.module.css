@@ -1,0 +1,19 @@
+/* styles/HomePage.module.css */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+  }
+  
+  .button {
+    font-size: 1.5rem;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #012247;
+    color: rgb(216, 215, 215);
+    border: none;
+    cursor: pointer;
+  }
+  
