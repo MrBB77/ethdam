@@ -64,29 +64,53 @@ const sismoConnectConfig = {
         return res;
     }
   
-    function handleSend(e) {
+    async function handleSend(e) {
       e.preventDefault();
-      // TODO: Add send logic here
-      console.log(tokenAddress, amount);
+      try {
+        // Hívja az ethers objektum spendProvision funkcióját a megadott értékekkel.
+        const res = await ethers.spendProvision(tokenAddress, amount, recipient);
+        await res.wait();
+        console.log('Token sent successfully');
+      } catch (error) {
+        console.error('There was an error while sending: ', error);
+      }
     }
   
-    function handleAddRailgun(e) {
+    async function handleAddRailgun(e) {
       e.preventDefault();
-      // TODO: Add railgun logic here
-      console.log(railgunAddress);
+      try {
+        const res = await ethers.provideRailgunAddr(railgunAddress);
+        await res.wait();
+        console.log('Railgun address added successfully');
+      } catch (error) {
+        console.error('There was an error while trying to add Railgun address: ', error);
+      }
     }
+    
 
-    const handleAllowanceAdd = async (e) => {
+    async function handleAllowanceAdd(e) {
       e.preventDefault();
-      // Implement logic here to add allowance for the employee.
-      console.log("Adding allowance for employee.");
+      try {
+        const res = await ethers.provisionEmployee(token, amount, employee, expiry, allowlist);
+        await res.wait();
+        console.log('Employee provision added successfully');
+      } catch (error) {
+        console.error('There was an error while adding provision: ', error);
+      }
     }
+    
   
-    const handleAllowanceUpdate = async (e) => {
+    async function handleAllowanceUpdate(e) {
       e.preventDefault();
-      // Implement logic here to update allowance for the employee.
-      console.log("Updating allowance for employee.");
+      try {
+        const res = await ethers.updateProvision(id, amount, expiry, allowlist, denylist);
+        await res.wait();
+        console.log('Provision updated');
+      } catch (error) {
+        console.error('There was an error while updating provision: ', error);
+      }
     }
+    
   
   
     return (
