@@ -13,10 +13,24 @@ body {
 .page-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  height: 100vh;
-  background: linear-gradient(90deg, #9fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #F092A4, #1B2847); /* hozzáadtam a két fő színt a gradienshez */
+  color: #fff;
+}
+
+::placeholder {
+  color: white;
+  opacity: 1;
+}
+
+:-ms-input-placeholder {
+  color: white;
+}
+
+::-ms-input-placeholder {
+  color: white;
 }
 
 .upper-part {
