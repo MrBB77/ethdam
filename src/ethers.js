@@ -43,7 +43,7 @@ class Ethers {
 
     provisionEmployee = async (token, amount, employee, expiry, allowlist) => {
         try {
-            const tx = await this.employer.provisionEmployee(token, amount, employee, allowlist);
+            const tx = await this.employer.provisionEmployee(token, amount, employee, expiry, allowlist);
             await tx.wait();
             return true;
         } catch (e) {
